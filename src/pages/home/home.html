@@ -8,17 +8,6 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let name of myArray">
-      <ion-item >
-        {{ name }}
-      </ion-item>
-      <ion-item-options side="right">
-      <button ion-button color="primary">
-        <ion-icon name="mail"></ion-icon>
-        Email
-      </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <button ion-button (click)="captureImage()">Capture</button><br>
+  <img [src]="myImage">
 </ion-content>
