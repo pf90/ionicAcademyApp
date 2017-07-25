@@ -1,31 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { TextToSpeech } from '@ionic-native/text-to-speech'; // ionic plugin add cordova-plugin-tts
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  myImage: string;
-  constructor(public navCtrl: NavController, private camera: Camera) {
+  // Values for our plugin and form
+  speakingText = '';
+  speakingLocale = 'en-GB';
+  speakingRate = 160;
 
+  constructor(public navCtrl: NavController, public tts: TextToSpeech) { }
+
+  speak() {
+    // Construct the values for the Speach Plugin
+    let options = {
+      text: this.speakingText,
+      locale: this.speakingLocale,
+      rate: this.speakingRate / 100
+    };
+
+    // Let the plugin speak!
+    this.tts.speak(options)
+      .then(() => console.log('Success'))
+      .catch((reason: any) => console.log(reason));
   }
-
-  captureImage() {
-    let options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      this.myImage = imageData;
-    }, err => {
-      console.log('error: ', err);
-    });
-  }
-
-
 }

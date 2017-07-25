@@ -1,13 +1,30 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ foo }}
+      Ionic Speaking
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-item>
+    <ion-input type="text" placeholder="Let me say something" [(ngModel)]="speakingText"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Locale</ion-label>
+    <ion-select [(ngModel)]="speakingLocale">
+      <ion-option value="en-G">en-GB</ion-option>
+      <ion-option value="en-US">en-US</ion-option>
+      <ion-option value="de-DE">de-DE</ion-option>
+    </ion-select>
+  </ion-item>
 
-  <button ion-button (click)="captureImage()">Capture</button><br>
-  <img [src]="myImage">
+  <ion-item>
+    <ion-range [(ngModel)]="speakingRate" min="100" max="200">
+      <ion-icon range-left small name="speedometer"></ion-icon>
+      <ion-icon range-right name="speedometer"></ion-icon>
+    </ion-range>
+  </ion-item>
+
+  <button ion-button full icon-left (click)="speak()"><ion-icon name="megaphone"></ion-icon>Speak!</button>
 </ion-content>
